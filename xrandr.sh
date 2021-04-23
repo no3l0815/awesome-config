@@ -1,2 +1,0 @@
-#!/bin/sh
-xrandr --output DisplayPort-0 --primary --mode 2560x1440 --pos 0x120 --rotate normal --refresh 74.97 --output DisplayPort-1 --mode 1680x1050 --pos 2560x0 --rotate left --output HDMI-A-0 --off --output HDMI-A-1 --off --output DVI-D-0 --off --left-of DisplayPort-1
