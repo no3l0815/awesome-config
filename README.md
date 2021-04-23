@@ -1,3 +1,3 @@
 ## Build in progress
 # awesome-config
-My configuration of the awesome window manager
+My configuration for the awesome window manager
