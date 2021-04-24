@@ -49,7 +49,7 @@ beautiful.init(gears.filesystem.get_themes_dir() .. "default/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
 terminal = "konsole"
-editor = os.getenv("EDITOR") or "nano"
+editor = os.getenv("EDITOR") or "subl"
 editor_cmd = terminal .. " -e " .. editor
 
 -- Default modkey.
@@ -63,12 +63,12 @@ modkey = "Mod4"
 awful.layout.layouts = {
     awful.layout.suit.tile,
     awful.layout.suit.floating,
-    awful.layout.suit.tile.left,
-    awful.layout.suit.tile.bottom,
-    awful.layout.suit.tile.top,
+    --awful.layout.suit.tile.left,
+    --awful.layout.suit.tile.bottom,
+    --awful.layout.suit.tile.top,
     --awful.layout.suit.fair,
     --awful.layout.suit.fair.horizontal,
-    awful.layout.suit.spiral,
+    --awful.layout.suit.spiral,
     --awful.layout.suit.spiral.dwindle,
     --awful.layout.suit.max,
     awful.layout.suit.max.fullscreen,
@@ -79,6 +79,16 @@ awful.layout.layouts = {
     -- awful.layout.suit.corner.se,
 }
 -- }}}
+
+--Tab cyclefocus
+local cyclefocus = require('cyclefocus')
+awful.key({ modkey,           }, "Tab",
+    function ()
+        awful.client.focus.history.previous()
+        if client.focus then
+            client.focus:raise()
+        end
+    end)
 
 --Activating the script for Xrandr
 	--This has to be loaded before the background because of a bug
@@ -176,7 +186,7 @@ awful.screen.connect_for_each_screen(function(s)
     set_wallpaper(s)
 
     -- Each screen has its own tag table.
-    awful.tag({ "1", "2", "3", "4", "5", "6", "7", "8", "9" }, s, awful.layout.layouts[1])
+    awful.tag({ "1", "2", "3", "4", "5", "6", "7" }, s, awful.layout.layouts[1])
 
     -- Create a promptbox for each screen
     s.mypromptbox = awful.widget.prompt()
@@ -317,8 +327,6 @@ globalkeys = gears.table.join(
               end,
               {description = "restore minimized", group = "client"}),
 
-
-
     -- dmenu
     awful.key({ modkey },            "r",     function () 
     			awful.util.spawn("dmenu_run") end,
@@ -329,24 +337,26 @@ globalkeys = gears.table.join(
     			awful.util.spawn("firefox") end,
     			{description = "run firefox", group = "applications"}),
 
- -- pcmanfm
+ -- file manager (pcmanfm)
     awful.key({ modkey },            "q",     function () 
     			awful.util.spawn("pcmanfm") end,
-    			{description = "run file-manager", group = "applications"}),
+    			{description = "open the file-manager", group = "applications"}),
 
+--Runs lua code 
+   -- awful.key({ modkey }, "x",
+              --function ()
+              --    awful.prompt.run {
+              --      prompt       = "Run Lua code: ",
+              --      textbox      = awful.screen.focused().mypromptbox.widget,
+              --      exe_callback = awful.util.eval,
+              --      history_path = awful.util.get_cache_dir() .. "/history_eval"
+              --    }
+              --end,
+              --{description = "lua execute prompt", group = "awesome"}),
 
-    awful.key({ modkey }, "x",
-              function ()
-                  awful.prompt.run {
-                    prompt       = "Run Lua code: ",
-                    textbox      = awful.screen.focused().mypromptbox.widget,
-                    exe_callback = awful.util.eval,
-                    history_path = awful.util.get_cache_dir() .. "/history_eval"
-                  }
-              end,
-              {description = "lua execute prompt", group = "awesome"}),
-    -- Menubar
-    awful.key({ modkey }, "p", function() menubar.show() end,
+    --Menubar
+    --deep down we all know dmenu is better
+   awful.key({ modkey }, "p", function() menubar.show() end,
               {description = "show the menubar", group = "launcher"})
 )
 
@@ -555,19 +565,19 @@ client.connect_signal("request::titlebars", function(c)
             buttons = buttons,
             layout  = wibox.layout.fixed.horizontal
         },
-        { -- Middle
+        { -- (Middle) basically left but cool
             { -- Title
-                align  = "center",
+                align  = "left",
                 widget = awful.titlebar.widget.titlewidget(c)
             },
             buttons = buttons,
             layout  = wibox.layout.flex.horizontal
         },
         { -- Right
-            awful.titlebar.widget.floatingbutton (c),
+            --awful.titlebar.widget.floatingbutton (c),
             awful.titlebar.widget.maximizedbutton(c),
-            awful.titlebar.widget.stickybutton   (c),
-            awful.titlebar.widget.ontopbutton    (c),
+            --awful.titlebar.widget.stickybutton   (c),
+            --awful.titlebar.widget.ontopbutton    (c),
             awful.titlebar.widget.closebutton    (c),
             layout = wibox.layout.fixed.horizontal()
         },
@@ -587,7 +597,7 @@ client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_n
 
 
 -- Autostart Applications
-awful.spawn.with_shell("compton")
+awful.spawn.with_shell("compton -o 0.90")
 awful.spawn.with_shell("nitrogen --restore")
 
 
