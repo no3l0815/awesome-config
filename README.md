@@ -6,6 +6,7 @@ My configuration for the awesome window manager
 * awesome
 * dmenu
 * pcmanfm
+* nitrogen
 
 ### default programms
 * Konsole
