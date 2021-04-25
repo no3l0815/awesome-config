@@ -61,10 +61,10 @@ modkey = "Mod4"
 
 -- Table of layouts to cover with awful.layout.inc, order matters.
 awful.layout.layouts = {
-    awful.layout.suit.tile,
+	awful.layout.suit.tile.left,
+    --awful.layout.suit.tile,
     awful.layout.suit.floating,
-    --awful.layout.suit.tile.left,
-    --awful.layout.suit.tile.bottom,
+    awful.layout.suit.tile.bottom,
     --awful.layout.suit.tile.top,
     --awful.layout.suit.fair,
     --awful.layout.suit.fair.horizontal,
@@ -109,8 +109,8 @@ mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu, beautiful.awesom
                                   }
                         })
 
-mylauncher = awful.widget.launcher({ image = beautiful.awesome_icon,
-                                     menu = mymainmenu })
+--mylauncher = awful.widget.launcher({ image = beautiful.awesome_icon,
+                                     --menu = mymainmenu })
 
 -- Menubar configuration
 menubar.utils.terminal = terminal -- Set the terminal for applications that require it
@@ -238,7 +238,7 @@ end)
 
 -- {{{ Mouse bindings
 root.buttons(gears.table.join(
-    awful.button({ }, 3, function () mymainmenu:toggle() end),
+    --awful.button({ }, 3, function () mymainmenu:toggle() end),
     awful.button({ }, 4, awful.tag.viewnext),
     awful.button({ }, 5, awful.tag.viewprev)
 ))
@@ -332,15 +332,22 @@ globalkeys = gears.table.join(
     			awful.util.spawn("dmenu_run") end,
     			{description = "run dmenu", group = "launcher"}),
 
-  -- firefox
+  -- Webbroser (firefox)
     awful.key({ modkey },            "b",     function () 
     			awful.util.spawn("firefox") end,
-    			{description = "run firefox", group = "applications"}),
+    			{description = "run webbrowser", group = "applications"}),
 
  -- file manager (pcmanfm)
     awful.key({ modkey },            "q",     function () 
     			awful.util.spawn("pcmanfm") end,
     			{description = "open the file-manager", group = "applications"}),
+
+--Music player (spotify)
+    awful.key({ modkey },            "a",     function () 
+    			awful.util.spawn("spotify") end,
+    			{description = "open the music player", group = "applications"}),
+
+
 
 --Runs lua code 
    -- awful.key({ modkey }, "x",
@@ -597,7 +604,7 @@ client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_n
 
 
 -- Autostart Applications
-awful.spawn.with_shell("compton -o 0.90")
+awful.spawn.with_shell("compton -o 0.90 -i 1.0")
 awful.spawn.with_shell("nitrogen --restore")
 
 
