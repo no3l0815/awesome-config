@@ -13,3 +13,7 @@ My configuration for the awesome window manager
 * Firefox
 * sublime-text
 * pcmanfm
+* spotify
+
+
+![](./screenshot.png)
