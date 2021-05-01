@@ -59,6 +59,9 @@ editor_cmd = terminal .. " -e " .. editor
 -- However, you can use another modifier like Mod1, but it may interact with others.
 modkey = "Mod4"
 
+
+maximized_hide_border = true
+
 -- Table of layouts to cover with awful.layout.inc, order matters.
 awful.layout.layouts = {
 	awful.layout.suit.tile.left,
@@ -601,10 +604,7 @@ client.connect_signal("focus", function(c) c.border_color = beautiful.border_foc
 client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
 -- }}}
 
-
-
 -- Autostart Applications
 awful.spawn.with_shell("compton -o 0.90 -i 1.0")
 awful.spawn.with_shell("nitrogen --restore")
-
 
