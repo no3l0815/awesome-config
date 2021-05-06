@@ -7,6 +7,8 @@ My configuration for the awesome window manager
 * dmenu
 * pcmanfm
 * nitrogen
+* spotify-cli
+* acpi
 
 ### default programms (change them in the config if you dont want them)
 * Konsole 
