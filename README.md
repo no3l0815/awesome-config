@@ -15,7 +15,7 @@ My configuration for the awesome window manager
 * Firefox
 * sublime-text
 * pcmanfm
-* spotify
+* spotify (flatpak)
 
 #### **Notice** 
 this config comes with a standard monitor resolution setting. Please deactivate it in the config or just use my weird monitor arangment if you want.
