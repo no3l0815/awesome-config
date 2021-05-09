@@ -5,7 +5,6 @@ My configuration for the awesome window manager
 ### What you have to install
 * awesome
 * dmenu
-* pcmanfm
 * nitrogen
 * spotify-cli
 * acpi
@@ -13,9 +12,9 @@ My configuration for the awesome window manager
 ### default programms (change them in the config if you dont want them)
 * Alacritty
 * Firefox
-* sublime-text
-* pcmanfm
-* spotify (flatpak)
+* Sublime-text
+* Pcmanfm
+* Spotify (flatpak)
 
 #### **Notice** 
 this config comes with a standard monitor resolution setting. Please deactivate it in the config or just use my weird monitor arangment if you want.
