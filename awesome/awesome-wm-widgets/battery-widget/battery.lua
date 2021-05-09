@@ -27,7 +27,7 @@ local function worker(user_args)
     local args = user_args or {}
 
     local font = args.font or 'Play 8'
-    local path_to_icons = args.path_to_icons or "/usr/share/icons/Arc/status/symbolic/"
+    local path_to_icons = args.path_to_icons or HOME .. "/.config/awesome/icons/symbolic/"
     local show_current_level = args.show_current_level or false
     local margin_left = args.margin_left or 0
     local margin_right = args.margin_right or 0
@@ -40,7 +40,7 @@ local function worker(user_args)
     local warning_msg_title = args.warning_msg_title or 'Huston, we have a problem'
     local warning_msg_text = args.warning_msg_text or 'Battery is dying'
     local warning_msg_position = args.warning_msg_position or 'bottom_right'
-    local warning_msg_icon = args.warning_msg_icon or WIDGET_DIR .. '/spaceman.jpg'
+    --local warning_msg_icon = args.warning_msg_icon or WIDGET_DIR .. '/spaceman.jpg'
     local enable_battery_warning = args.enable_battery_warning
     if enable_battery_warning == nil then
         enable_battery_warning = true
