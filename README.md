@@ -11,7 +11,7 @@ My configuration for the awesome window manager
 * acpi
 
 ### default programms (change them in the config if you dont want them)
-* Konsole 
+* Alacritty
 * Firefox
 * sublime-text
 * pcmanfm
