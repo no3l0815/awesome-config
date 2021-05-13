@@ -17,10 +17,12 @@ local hotkeys_popup = require("awful.hotkeys_popup")
 --load spotify_widget
 local spotify_widget = require("awesome-wm-widgets.spotify-widget.spotify")
 --load battery_widget (work in progress)
---local battery_widget = require("awesome-wm-widgets.battery-widget.battery")
+local battery_widget = require("awesome-wm-widgets.battery-widget.battery")
 -- Enable hotkeys help widget for VIM and other apps
 -- when client with a matching name is opened:
 require("awful.hotkeys_popup.keys")
+--set the home directory
+local HOME = os.getenv("HOME")
 
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
@@ -236,13 +238,13 @@ awful.screen.connect_for_each_screen(function(s)
             layout = wibox.layout.fixed.horizontal,
    		-- spotify_widget
         spotify_widget({
-          play_icon = '/home/noel/.config/awesome/icons/spotify-client.svg',
+          play_icon = HOME..'/.config/awesome/icons/spotify-client.svg',
          --pause_icon = '~/.config/awesome/icons/spotify-client.png',
          max_length = 70
         }),
             wibox.widget.systray(),
             mytextclock,
-            --battery_widget(),
+            battery_widget(),
             s.mylayoutbox,
         },
     }
@@ -265,8 +267,8 @@ globalkeys = gears.table.join(
               {description = "view previous", group = "tag"}),
     awful.key({ modkey,           }, "Right",  awful.tag.viewnext,
               {description = "view next", group = "tag"}),
-    awful.key({ modkey,           }, "Escape", awful.tag.history.restore,
-              {description = "go back", group = "tag"}),
+    --awful.key({ modkey,           }, "Escape", awful.tag.history.restore,
+              --{description = "go back", group = "tag"}),
 
     awful.key({ modkey,           }, "j",
         function ()
@@ -340,28 +342,36 @@ globalkeys = gears.table.join(
               end,
               {description = "restore minimized", group = "client"}),
 
-    -- dmenu
+ 	-- dmenu
     awful.key({ modkey },            "r",     function () 
     			awful.util.spawn("dmenu_run") end,
     			{description = "run dmenu", group = "launcher"}),
 
-  -- Webbroser (firefox)
+	-- Webbroser (firefox)
     awful.key({ modkey },            "b",     function () 
     			awful.util.spawn("firefox") end,
     			{description = "run webbrowser", group = "applications"}),
 
- -- file manager (pcmanfm)
+	-- file manager (pcmanfm)
     awful.key({ modkey },            "q",     function () 
     			awful.util.spawn("pcmanfm") end,
     			{description = "open the file-manager", group = "applications"}),
 
---Music player (spotify)
+	-- Music player (spotify)
     awful.key({ modkey },            "a",     function () 
     			--awful.util.spawn("spotify") end,
     			awful.util.spawn("flatpak run com.spotify.Client") end, --for the flatpak version
-
     			{description = "open the music player", group = "applications"}),
 
+	--Logout menu (dmenu)
+	awful.key({ modkey, }, 			"Escape", function () 
+				awful.util.spawn(HOME..'/.config/awesome/scripts/dm-logout') end,
+				{description = "open the Logout menu", group = "awesome"}),
+
+--Logout menu (dmenu)
+	awful.key({ modkey, "Shift"}, 			"Escape", function () 
+				awful.util.spawn(HOME..'/.config/awesome/scripts/dm-wifi') end,
+				{description = "open the wifi settings", group = "awesome"}),
 
 
 --Runs lua code 
