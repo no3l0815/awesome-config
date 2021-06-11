@@ -12,7 +12,7 @@ My configuration for the awesome window manager
 ### default programms (change them in the config if you dont want them)
 * Alacritty
 * Firefox
-* Sublime-text
+* micro
 * Pcmanfm
 * Spotify (flatpak)
 
