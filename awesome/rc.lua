@@ -16,7 +16,7 @@ local menubar = require("menubar")
 local hotkeys_popup = require("awful.hotkeys_popup")
 --load spotify_widget
 local spotify_widget = require("awesome-wm-widgets.spotify-widget.spotify")
---load battery_widget (work in progress)
+--load battery_widget
 local battery_widget = require("awesome-wm-widgets.battery-widget.battery")
 -- Enable hotkeys help widget for VIM and other apps
 -- when client with a matching name is opened:
@@ -52,10 +52,9 @@ end
 -- {{{ Variable definitions
 -- Themes define colours, icons, font and wallpapers.
 beautiful.init(gears.filesystem.get_themes_dir() .. "default/theme.lua")
-
 -- This is used later as the default terminal and editor to run.
 terminal = "alacritty"
-editor = os.getenv("EDITOR") or "subl"
+editor = os.getenv("EDITOR") or "micro"
 editor_cmd = terminal .. " -e " .. editor
 
 -- Default modkey.
@@ -99,8 +98,8 @@ awful.key({ modkey,           }, "Tab",
         end
     end)
 
---Activating the script for Xrandr
-	--This has to be loaded before the background because of a bug
+--Activating the script for setting Xrandr
+	--This has to be loaded before the background because of a bug on my monitor setup
 awful.spawn.with_shell("~/.config/awesome/xrandr.sh")
 
 -- {{{ Menu
@@ -618,7 +617,7 @@ client.connect_signal("request::titlebars", function(c)
 end)
 
 -- Enable sloppy focus, so that focus follows mouse.
-client.connect_signal("mouse::enter", function(c)
+	client.connect_signal("mouse::enter", function(c)
     c:emit_signal("request::activate", "mouse_enter", {raise = false})
 end)
 
@@ -630,3 +629,23 @@ client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_n
 awful.spawn.with_shell("compton -o 0.90 -i 1.0")
 awful.spawn.with_shell("nitrogen --restore")
 
+ -- Volume Keys
+   awful.key({}, "XF86AudioLowerVolume", function ()
+     awful.util.spawn("amixer -q -D pulse sset Master 5%-", true)
+   end)
+   awful.key({}, "XF86AudioRaiseVolume", function ()
+     awful.util.spawn("amixer -q -D pulse sset Master 5%+", true)
+   end)
+   awful.key({}, "XF86AudioMute", function ()
+     awful.util.spawn("amixer -D pulse set Master 1+ toggle", true)
+   end)
+   -- Media Keys
+   awful.key({}, "XF86AudioPlay", function()
+     awful.util.spawn("playerctl play-pause", true)
+   end)
+   awful.key({}, "XF86AudioNext", function()
+     awful.util.spawn("playerctl next", true)
+   end)
+   awful.key({}, "XF86AudioPrev", function()
+     awful.util.spawn("playerctl previous", true)
+   end)
