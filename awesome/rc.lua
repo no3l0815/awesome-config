@@ -29,7 +29,8 @@ local HOME = os.getenv("HOME")
 -- another config (This code will only ever execute for the fallback config)
 if awesome.startup_errors then
     naughty.notify({ preset = naughty.config.presets.critical,
-                     title = "Oops, there were errors during startup!",
+                     --title = "Oops, there were errors during startup!",
+                     title = "Whoops, there were some small errors during startup",
                      text = awesome.startup_errors })
 end
 
@@ -42,7 +43,8 @@ do
         in_error = true
 
         naughty.notify({ preset = naughty.config.presets.critical,
-                         title = "Oops, an error happened!",
+                         --title = "Oops, an error happened!",
+                         title = "Whoops, there's a small error",
                          text = tostring(err) })
         in_error = false
     end)
@@ -82,9 +84,9 @@ awful.layout.layouts = {
     awful.layout.suit.max.fullscreen,
     --awful.layout.suit.magnifier,
     --awful.layout.suit.corner.nw,
-    -- awful.layout.suit.corner.ne,
-    -- awful.layout.suit.corner.sw,
-    -- awful.layout.suit.corner.se,
+    --awful.layout.suit.corner.ne,
+    --awful.layout.suit.corner.sw,
+    --awful.layout.suit.corner.se,
 }
 -- }}}
 
@@ -129,7 +131,6 @@ mykeyboardlayout = awful.widget.keyboardlayout()
 
 --Gaps
 beautiful.useless_gap = 3
-
 -- {{{ Wibar
 -- Create a textclock widget
 mytextclock = wibox.widget.textclock()
@@ -367,7 +368,7 @@ globalkeys = gears.table.join(
 				awful.util.spawn(HOME..'/.config/awesome/scripts/dm-logout') end,
 				{description = "open the Logout menu", group = "awesome"}),
 
---Logout menu (dmenu)
+	--Logout menu (dmenu)
 	awful.key({ modkey, "Shift"}, 			"Escape", function () 
 				awful.util.spawn(HOME..'/.config/awesome/scripts/dm-wifi') end,
 				{description = "open the wifi settings", group = "awesome"}),
