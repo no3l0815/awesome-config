@@ -8,6 +8,7 @@ My configuration for the awesome window manager
 * nitrogen
 * spotify-cli
 * acpi
+* arc icon theme
 
 ### default programms (change them in the config if you dont want them)
 * Alacritty
