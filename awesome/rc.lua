@@ -18,6 +18,8 @@ local hotkeys_popup = require("awful.hotkeys_popup")
 local spotify_widget = require("awesome-wm-widgets.spotify-widget.spotify")
 --load battery_widget
 local battery_widget = require("awesome-wm-widgets.battery-widget.battery")
+--load volume_widget+
+local volume_widget = require("awesome-wm-widgets.volume-widget.volume")
 -- Enable hotkeys help widget for VIM and other apps
 -- when client with a matching name is opened:
 require("awful.hotkeys_popup.keys")
@@ -236,14 +238,17 @@ awful.screen.connect_for_each_screen(function(s)
         s.mytasklist, -- Middle widget
         { -- Right widgets
             layout = wibox.layout.fixed.horizontal,
-   		-- spotify_widget
-        spotify_widget({
-          play_icon = HOME..'/.config/awesome/icons/spotify-client.svg',
-         --pause_icon = '~/.config/awesome/icons/spotify-client.png',
-         max_length = 70
-        }),
+        	spotify_widget({
+          		play_icon = HOME.."/.config/awesome/icons/spotify-client.svg",
+         		--pause_icon = '~/.config/awesome/icons/spotify-client.png',
+        		 max_length = 70
+        		}),
             wibox.widget.systray(),
             mytextclock,
+			volume_widget({
+				widget_type = "icon",
+				icon_dir = HOME.."/.config/awesome/icons/symbolic/",
+				}),
             battery_widget(),
             s.mylayoutbox,
         },
@@ -650,3 +655,9 @@ awful.spawn.with_shell("nitrogen --restore")
    awful.key({}, "XF86AudioPrev", function()
      awful.util.spawn("playerctl previous", true)
    end)
+
+--volume widget stuff
+    -- customized
+        volume_widget{
+            widget_type = 'arc'
+        }
