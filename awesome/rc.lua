@@ -132,7 +132,7 @@ menubar.utils.terminal = terminal -- Set the terminal for applications that requ
 mykeyboardlayout = awful.widget.keyboardlayout()
 
 --Gaps
-beautiful.useless_gap = 3
+beautiful.useless_gap = 2
 -- {{{ Wibar
 -- Create a textclock widget
 mytextclock = wibox.widget.textclock()
